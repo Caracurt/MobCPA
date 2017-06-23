@@ -1,3 +1,5 @@
+# in this module raw data from txt files is obtained csv is created as well as figures
+
 import numpy as np
 import pandas as pd
 import sys
@@ -16,13 +18,13 @@ def parce_fileName(fileName):
     file_date = pd.to_datetime(date_str, format="%Y-%m-%d")
     return code, file_date
 
-def obtain_raw_data():
+def obtain_raw_data(param_dict):
     #dir_path = 'C:\Users\Mikhail\Documents\MobCPA\data\lead_data\lead_data_up_to31may'
 
     # global parameters
     dir_path = '.\lead_data\lead_data_up_to31may'
     dir_data_csv = '.\data_csv'
-    code_check = 235
+    code_check = param_dict.get('code')
 
 
     # obtain all files in the dir and parse the name
@@ -224,7 +226,7 @@ def obtain_raw_data():
             figName = "Raw_dat_code_{}_date_{}.png".format(code, cut_date)
             path_to_fig = os.path.join(dir_path_fig, figName)
 
-            if True:
+            if param_dict.get('plot_raw'):
                 fig = plt.figure(fig_idx)
                 plt.plot(data_fin.DeltaDays, data_fin.rev, 'r-')
                 plt.axvline(30, color='b')
