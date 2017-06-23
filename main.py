@@ -8,7 +8,7 @@ from create_model import LeadModel
 # codes to set: 15, 260, 283, 235
 
 # set global params
-param_dict = {'code': 235, 'plot_raw': False, 'get_data': False, 'Thr_hist': [1, 2, 3], 'nu': 0.9, 'method': 'Hist',
+param_dict = {'code': 283, 'plot_raw': False, 'get_data': False, 'Thr_hist': [3, 7, 10], 'nu': 0.9, 'method': 'Hist',
               'numF_ir': 5}
 
 # obtain raw data from files if it is required

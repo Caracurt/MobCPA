@@ -2,6 +2,6 @@
 ('plot_raw', False)
 ('get_data', False)
 ('nu', 0.9)
-('Thr_hist', [1, 2, 3])
+('Thr_hist', [3, 7, 10])
 ('numF_ir', 5)
 ('method', 'Hist')

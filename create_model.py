@@ -71,7 +71,26 @@ class LeadModel:
         pdIR['Rev'] = Sum_r
 
         # here possible processing over obtained impulse response
-        self.pdIR = pdIR
+        # remove raws where there are empy spaces within first N_f days
+        N_f = 5
+        debug = False
+        l = pdIR.shape[0]
+        thr_low = 0.1
+        idx_take = [True for i in range(l)]
+
+        for i in range(N_f):
+            idx_c = pdIR[i] > thr_low
+            idx_tmp = [x and y for x, y in zip(idx_c, idx_take)]
+            idx_take = idx_tmp
+        pdIR_cut = pdIR[idx_take]
+
+        if debug:
+            list_id = range(N_f)
+            list_id.append('Dates')
+            print pdIR_cut.loc[:, list_id]
+            raw_input()
+
+        self.pdIR = pdIR_cut
         test_df = self.create_features()
         return test_df
 
@@ -181,6 +200,7 @@ class LeadModel:
                           columns=['PredictReturn', 'ActualReturn', 'Diff', 'Date'])
 
         print df.head(100)
+        print 'Average prediction difference', np.mean(y_diff)
 
         # now we are ready to save Ridge results
         if doSave:
